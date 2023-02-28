@@ -11,6 +11,11 @@ var labelsToRemove = core
   .split(",")
   .map(x => x.trim());
 
+  var developers = core
+  .getInput("developers")
+  .split(",")
+  .map(x => x.trim());
+
 /**
  * Obtain the issue number either from input or from the context
  * @param core - the core object
@@ -71,6 +76,11 @@ async function label() {
       return "No action being taken. Ignoring because one or more assignees have been added to the issue";
     }
   }
+
+  if (ownerName in developers) {
+    return "No action being taken. Ignoring because this issue has been created by a non-developer.";
+  }
+  
 
   let labels = updatedIssueInformation.data.labels.map(label => label.name);
   if (ignoreIfLabeled) {
