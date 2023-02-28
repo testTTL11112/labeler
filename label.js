@@ -82,7 +82,7 @@ async function label() {
   prAuthor = (context.payload.pull_request) ? context.payload.pull_request.user.login : '';
   console.log('issue author: ', issueAuthor)
   console.log('developers: ', developers)
-  if ((issueAuthor in developers) || (prAuthor in developers)) {
+  if ((developers.includes(issueAuthor)) || (developers.includes(prAuthor))) {
     return "No action being taken. Ignoring because this issue has been created by a non-developer.";
   }
   
