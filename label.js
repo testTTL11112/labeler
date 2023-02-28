@@ -58,7 +58,6 @@ async function label() {
   if (issueNumber === undefined) {
     return "No action being taken. Ignoring because issueNumber was not identified";
   }
-  console.log(context.payload.issue)
   labelsToAdd = labelsToAdd.filter(value => ![""].includes(value));
 
   labelsToRemove = labelsToRemove.filter(value => ![""].includes(value));
@@ -78,7 +77,9 @@ async function label() {
     }
   }
 
-  if (ownerName in developers) {
+  issueAuthor = context.payload.issue.user.login
+  prAuthor = context.payload.pull_request.user.login
+  if ((issueAuthor in developers) || (prAuthor in developers)) {
     return "No action being taken. Ignoring because this issue has been created by a non-developer.";
   }
   
