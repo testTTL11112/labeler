@@ -10,6 +10,7 @@ var labelsToRemove = core
   .getInput("remove-labels")
   .split(",")
   .map(x => x.trim());
+  
 
   var developers = core
   .getInput("developers")
@@ -103,7 +104,7 @@ async function label() {
     issue_number: issueNumber,
     labels: labels
   });
-  return `Updated labels in ${issueNumber}. Added: ${labelsToAdd}. Removed: ${labelsToRemove}. by: ${context.payload.repository.owner.login} name: ${context.payload.repository.owner.name}`;
+  return `Updated labels in ${issueNumber}. Added: ${labelsToAdd}. Removed: ${labelsToRemove}. by: ${context.payload.repository.owner.login} name: ${context.payload.sender}`;
 }
 
 label()
