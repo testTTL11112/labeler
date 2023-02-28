@@ -1,5 +1,6 @@
 const github = require("@actions/github");
 const core = require("@actions/core");
+const { cosmiconfig } = require("prettier/third-party");
 
 var labelsToAdd = core
   .getInput("add-labels")
@@ -79,6 +80,7 @@ async function label() {
 
   issueAuthor =  (context.payload.issue) ? context.payload.issue.user.login : '';
   prAuthor = (context.payload.pull_request) ? context.payload.pull_request.user.login : '';
+  console.log('issue author: ', issueAuthor)
   if ((issueAuthor in developers) || (prAuthor in developers)) {
     return "No action being taken. Ignoring because this issue has been created by a non-developer.";
   }
