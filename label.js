@@ -58,7 +58,7 @@ async function label() {
   if (issueNumber === undefined) {
     return "No action being taken. Ignoring because issueNumber was not identified";
   }
-
+  console.log(context.payload.issue)
   labelsToAdd = labelsToAdd.filter(value => ![""].includes(value));
 
   labelsToRemove = labelsToRemove.filter(value => ![""].includes(value));
@@ -104,7 +104,7 @@ async function label() {
     issue_number: issueNumber,
     labels: labels
   });
-  return `Updated labels in ${issueNumber}. Added: ${labelsToAdd}. Removed: ${labelsToRemove}. by: ${context.payload.repository.owner.login} name: ${context.payload.sender}`;
+  return `Updated labels in ${issueNumber}. Added: ${labelsToAdd}. Removed: ${labelsToRemove}. by: ${context.payload.repository.owner.login} name: ${context.payload.sender.type}`;
 }
 
 label()
